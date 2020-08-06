@@ -22,6 +22,8 @@ def create_movie(title, overview, release_date, poster_path):
   db.session.add(movie)
   db.session.commit()
 
+  return movie
+
 
 def create_rating(score, movie_id, user_id):
     """Create and return a new rating"""
@@ -30,6 +32,8 @@ def create_rating(score, movie_id, user_id):
 
     db.session.add(rating)
     db.session.commit()
+
+    return rating
 
 
 if __name__ == '__main__':
