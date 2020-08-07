@@ -19,6 +19,23 @@ def Homepage():
 
     return render_template('homepage.html')
 
+@app.route('/users', methods=['POST'])
+def register_user():
+    """Create a new user."""
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        flash('Account with this email already exists!')
+    else:
+        crud.create_user(email, password)
+        flash(f'Account for {email} created!')
+
+    return redirect('/')
+
 @app.route('/movies')
 def movies_all():
 
