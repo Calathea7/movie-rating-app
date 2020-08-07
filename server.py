@@ -28,13 +28,16 @@ def register_user():
 
     user = crud.get_user_by_email(email)
 
-    if user:
-        flash('Account with this email already exists!')
+    if user and password == user.password:
+        flash('Account with this email already exists. You are now logged in!')
+    elif user and password != user.password:
+        flash('Password is incorrect for this user.')
     else:
         crud.create_user(email, password)
         flash(f'Account for {email} created!')
 
     return redirect('/')
+
 
 @app.route('/movies')
 def movies_all():
