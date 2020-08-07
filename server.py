@@ -33,6 +33,20 @@ def movie_details(movie_id):
 
     return render_template('movie_detail.html', movie=movie)
 
+@app.route('/users')
+def users_all():
+
+    users = crud.all_users()
+
+    return render_template('users.html', users=users)
+
+@app.route('/users/<user_id>')
+def user_details(user_id):
+
+    user = crud.get_user_by_id(user_id)
+
+    return render_template('user_detail.html', user=user)
+
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
